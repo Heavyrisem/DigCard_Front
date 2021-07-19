@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, useParams, Route } from 'react-router-dom';
 
-const ENDPOINT = 'localhost:8000';
+import { ENDPOINT } from '../Config.json';
 
 export interface Card_T {
     [index: string]: string | undefined,
@@ -9,8 +9,6 @@ export interface Card_T {
     name: string,
     job: string,
     email: string,
-    phone: string,
-    URL: string,
     author: string
 }
 
@@ -39,7 +37,13 @@ function View() {
         <div>
             <h1>VIEW</h1>
 
-            {(Card)&& [Card.name, Card.job, Card.email].join(" ")}
+            {Card&&
+                <>
+                    <div>이름: {Card.name}</div>
+                    <div>직업: {Card.job}</div>
+                    <div>이메일: {Card.email}</div>
+                </>
+            }
         </div>
     )
 }
