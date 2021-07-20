@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, useParams, Route } from 'react-router-dom';
+import { BrowserRouter as Router, useParams, Route, Link } from 'react-router-dom';
+import '../style/View.css';
 
 import { ENDPOINT } from '../Config.json';
+import { Shadow } from './Utils';
+import CopyBtn from './CopyBtn';
 
 export interface Card_T {
     [index: string]: string | undefined,
@@ -34,15 +37,33 @@ function View() {
     }
 
     return (
-        <div>
-            {Card&&
-                <>
-                    <h1>{Card.author} 의 명함</h1>
-                    <div>이름: {Card.name}</div>
-                    <div>직업: {Card.job}</div>
-                    <div>이메일: {Card.email}</div>
-                </>
-            }
+        <div className="Float View" style={{boxShadow: Shadow()}}>
+            <div className="Left">
+                {Card&&
+                    <div className="Card">
+                        <h1>{Card.author} 의 명함</h1>
+                        <div className="info">
+                            <div><span>이름: {Card.name}</span> <CopyBtn str={Card.name} before={"복사"} after={"완료"}/></div>
+                            <div><span>직업: {Card.job}</span> <CopyBtn str={Card.job} before={"복사"} after={"완료"}/></div>
+                            <div><span>이메일: {Card.email}</span> <CopyBtn str={Card.email} before={"복사"} after={"완료"}/></div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div className="Right">
+                <div className="description">
+                    <h3>온라인 명함</h3>
+                    
+                    <div>기존 종이 명함의 불편한</div>
+                    <div>점들을 해결하고자 개발된 서비스 입니다.</div>
+                    <br />
+                    <div>명함을 만들고 나면</div>
+                    <div> <strong>URL/QR Code</strong> </div>
+                    <div>로 간단하게 접속 가능합니다.</div>
+                    <br />
+                    <Link to="/"><button>명함 만들기</button></Link>
+                </div>
+            </div>
         </div>
     )
 }

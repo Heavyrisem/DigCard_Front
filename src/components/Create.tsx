@@ -3,6 +3,10 @@ import QRCode from 'qrcode.react';
 import { Link, BrowserRouter as Router } from 'react-router-dom';
 import { ENDPOINT } from '../Config.json';
 
+import '../style/Create.css';
+import { Input, Shadow } from './Utils';
+import CopyBtn from './CopyBtn';
+
 
 function Create() {
     const name = useRef<HTMLInputElement>(null);
@@ -19,7 +23,7 @@ function Create() {
                 name: name.current?.value,
                 job: job.current?.value,
                 email: email.current?.value,
-                author: "Anonymous"
+                author: "익명 사용자"
             }
 
             let response = await fetch(`${ENDPOINT}/v1/card/create`, {
@@ -40,23 +44,47 @@ function Create() {
     }
 
     return (
-        <div>
-            <h1>Create</h1>
+        <div className="Float" style={{boxShadow: Shadow()}}>
+            <div className="Left">
+                <h1 className="ViewTitle">명함 만들기</h1>
 
-            <input type="text" placeholder="이름" ref={name} /><br />
-            <input type="text" placeholder="직업" ref={job} /><br />
-            <input type="text" placeholder="이메일" ref={email} /><br />
+                <div className="InputField">
+                    <Input label="이름" refs={name} />
+                    <Input label="직업" refs={job} />
+                    <Input label="이메일" refs={email} />
+                </div>
 
-            <button onClick={Upload}>생성</button>
+                <button onClick={Upload}>생성</button>
 
-            <br />
-            {ResultURL&& 
-                <>
-                    <div>Share this QR Code/URL</div>
-                    <QRCode value={ResultURL} /><br />
-                    <Link to={ResultURL}>{`https://${window.location.host}${ResultURL}`}</Link>
-                </>
-            }
+                <br />
+            </div>
+            <div className="Right">
+                {ResultURL?
+                    <>
+                        <div>Share this QR Code/URL</div><br />
+                        <QRCode value={ResultURL} /><br /><br />
+                        
+                        <div className="BtnList">
+                            <Link to={ResultURL}><button>명함 열기</button></Link>
+                            <CopyBtn str={`https://${window.location.host}${ResultURL}`} before="URL 복사" after={"복사 완료"}></CopyBtn>
+                        </div>
+                    </>
+                    :
+                    
+                    <div className="description">
+                        <h3>온라인 명함</h3>
+                        
+                        <div>기존 종이 명함의 불편한</div>
+                        <div>점들을 해결하고자 개발된 서비스 입니다.</div>
+                        <br />
+                        <div>명함을 만들고 나면</div>
+                        <div> <strong>URL/QR Code</strong> </div>
+                        <div>로 간단하게 접속 가능합니다.</div>
+                        <br />
+                        명함이 만들어지면 여기에 표시됩니다.
+                    </div>
+                }
+            </div>
         </div>
     )
 }
