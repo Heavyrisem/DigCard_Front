@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import QRCode from 'qrcode.react';
+import { Link, BrowserRouter as Router } from 'react-router-dom';
 import { ENDPOINT } from '../Config.json';
 
 
@@ -9,9 +10,11 @@ function Create() {
     const email = useRef<HTMLInputElement>(null);
 
     const [ResultURL, setResultURL] = useState<string>("");
+    const [Fetching, setFetching] = useState<boolean>(false);
 
     async function Upload() {
-        if (name && job && email) {
+        if (name && job && email && !Fetching) {
+            setFetching(true);
             const Card = {
                 name: name.current?.value,
                 job: job.current?.value,
@@ -28,10 +31,11 @@ function Create() {
 
             if (result.id) {
                 // alert(`http://${ENDPOINT}/view/${result.id}`);
-                setResultURL(`http://${window.location.host}/view/${result.id}`);
+                setResultURL(`/view/${result.id}`);
             } else {
                 alert(result.err);
             }
+            setFetching(false);
         }
     }
 
@@ -39,14 +43,20 @@ function Create() {
         <div>
             <h1>Create</h1>
 
-            <input type="text" placeholder="이름" ref={name} />
-            <input type="text" placeholder="직업" ref={job} />
-            <input type="text" placeholder="이메일" ref={email} />
+            <input type="text" placeholder="이름" ref={name} /><br />
+            <input type="text" placeholder="직업" ref={job} /><br />
+            <input type="text" placeholder="이메일" ref={email} /><br />
 
             <button onClick={Upload}>생성</button>
 
             <br />
-            {ResultURL&& <><QRCode value={ResultURL} /><br />{ResultURL}</>}
+            {ResultURL&& 
+                <>
+                    <div>Share this QR Code/URL</div>
+                    <QRCode value={ResultURL} /><br />
+                    <Link to={ResultURL}>{`http://${window.location.host}${ResultURL}`}</Link>
+                </>
+            }
         </div>
     )
 }
