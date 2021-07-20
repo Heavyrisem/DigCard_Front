@@ -22,7 +22,7 @@ function Create() {
                 author: "Anonymous"
             }
 
-            let response = await fetch(`http://${ENDPOINT}/v1/card/create`, {
+            let response = await fetch(`${ENDPOINT}/v1/card/create`, {
                 method: "POST",
                 body: JSON.stringify(Card),
                 headers: {'Content-Type': 'application/json'}
@@ -30,7 +30,7 @@ function Create() {
             let result: {id?: string, err?: string} = await response.json();
 
             if (result.id) {
-                // alert(`http://${ENDPOINT}/view/${result.id}`);
+                // alert(`${ENDPOINT}/view/${result.id}`);
                 setResultURL(`/view/${result.id}`);
             } else {
                 alert(result.err);
@@ -54,7 +54,7 @@ function Create() {
                 <>
                     <div>Share this QR Code/URL</div>
                     <QRCode value={ResultURL} /><br />
-                    <Link to={ResultURL}>{`http://${window.location.host}${ResultURL}`}</Link>
+                    <Link to={ResultURL}>{`https://${window.location.host}${ResultURL}`}</Link>
                 </>
             }
         </div>

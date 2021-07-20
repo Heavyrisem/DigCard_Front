@@ -23,7 +23,7 @@ function View() {
     }, [id]);
 
     async function ReadCardByID(id: string) {
-        let result = await fetch(`http://${ENDPOINT}/v1/card/${id}`, {
+        let result = await fetch(`${ENDPOINT}/v1/card/${id}`, {
             method: "GET"
         });
         // console.log(await result.text());
