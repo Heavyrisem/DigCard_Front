@@ -44,19 +44,19 @@ function Create() {
     }
 
     return (
-        <div className="Float" style={{boxShadow: Shadow()}}>
+        <div className="Float Create" style={{boxShadow: Shadow()}}>
             <div className="Left">
-                <h1 className="ViewTitle">명함 만들기</h1>
+                <div className="containor">
+                    <h1 className="ViewTitle">명함 만들기</h1>
 
-                <div className="InputField">
-                    <Input label="이름" refs={name} />
-                    <Input label="직업" refs={job} />
-                    <Input label="이메일" refs={email} />
+                    <div className="InputField">
+                        <Input label="이름" refs={name} />
+                        <Input label="직업" refs={job} />
+                        <Input label="이메일" refs={email} />
+                    </div>
+
+                    <button onClick={Upload}>생성</button>
                 </div>
-
-                <button onClick={Upload}>생성</button>
-
-                <br />
             </div>
             <div className="Right">
                 {ResultURL?

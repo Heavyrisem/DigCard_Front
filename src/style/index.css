@@ -59,3 +59,17 @@ button {
     /*요소의 높이의 반(50%) 만큼 위로 이동*/
     transform: translateY(-70%);
 }
+
+@media screen and (max-width: 1200px) {
+	.Float {
+		display: block;
+		width: 90%;
+	}
+	.Float .Right, .Left {
+		padding: 3rem;
+	}
+	.description {
+		position: static;
+		transform: translateY(0);
+	}
+}

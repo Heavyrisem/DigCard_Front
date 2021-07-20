@@ -22,7 +22,7 @@
 
 .Left button {
     margin-top: 1rem;
-    width: 20rem;
+    width: 100%;
     /* height: 2rem; */
     padding: .5rem;
 
@@ -58,4 +58,10 @@
 .Right button:hover {
     background-color: #ffbb8a;
     color: white;
+}
+
+@media screen and (max-width: 1200px) {
+    .InputField input {
+        width: 100%;
+    }
 }
