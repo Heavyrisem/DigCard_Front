@@ -61,6 +61,7 @@ button {
 }
 
 @media screen and (max-width: 1200px) {
+	body, html {height: 110vh;}
 	.Float {
 		display: block;
 		width: 90%;
