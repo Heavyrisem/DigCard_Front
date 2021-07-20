@@ -37,7 +37,7 @@ function View() {
         <div>
             {Card&&
                 <>
-                    <h1>{Card.author}의 명함</h1>
+                    <h1>{Card.author} 의 명함</h1>
                     <div>이름: {Card.name}</div>
                     <div>직업: {Card.job}</div>
                     <div>이메일: {Card.email}</div>
