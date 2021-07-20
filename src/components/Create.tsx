@@ -62,7 +62,7 @@ function Create() {
                 {ResultURL?
                     <>
                         <div>Share this QR Code/URL</div><br />
-                        <QRCode value={ResultURL} /><br /><br />
+                        <QRCode value={`https://${window.location.host}${ResultURL}`} /><br /><br />
                         
                         <div className="BtnList">
                             <Link to={ResultURL}><button>명함 열기</button></Link>
